@@ -43,11 +43,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   height: 50.0,
                   child: CustomButton(
                     onPressed: (){
-                      ap.isSignedIn == true ? Navigator.push(
-                          context, MaterialPageRoute(
-                          builder: (context) => const HomeScreen())) :
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterScreen(),
-                      ));
+                      if(ap.isSignedIn == true){
+                        Navigator.push(
+                            context, MaterialPageRoute(
+                            builder: (context) => const HomeScreen()
+                        ));
+                      } else {
+                        Navigator.push(
+                            context, MaterialPageRoute(
+                          builder: (context) => const RegisterScreen(),
+                        ));
+                      }
                     },
                     text: "Get Started",
                   ),
