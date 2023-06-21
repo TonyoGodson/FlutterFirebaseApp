@@ -1,3 +1,4 @@
+import 'package:firebase_flutter_app/screens/user_information_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
@@ -67,7 +68,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   fontWeight: FontWeight.w600,
                 )
             ),
-            onSubmitted: (value){
+            onCompleted: (value){
               setState(() {
                 otpCode = value;
               });
@@ -108,7 +109,14 @@ class _OtpScreenState extends State<OtpScreen> {
           verificationId: widget.verificationId,
           userOtp: userOtp,
           onSuccess: () {
+            ap.checkExistingUser().then((value) async {
+              if(value ==  true) {
 
+              } else {
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                      builder: (context) => const UserInformationScreen()), (route) => false);
+              }
+            });
           });
   }
 }
